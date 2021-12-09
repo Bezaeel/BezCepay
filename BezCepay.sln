@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BezCepay.Service", "BezCepa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BezCepay.Test", "BezCepay.Test\BezCepay.Test.csproj", "{E9B83C26-D1A1-4CC7-83C4-BBBC7A22C615}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BezCepay.Data", "BezCepay.Data\BezCepay.Data.csproj", "{65A71729-7178-4BE8-991A-D9A1D8C74959}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{E9B83C26-D1A1-4CC7-83C4-BBBC7A22C615}.Release|x64.Build.0 = Release|Any CPU
 		{E9B83C26-D1A1-4CC7-83C4-BBBC7A22C615}.Release|x86.ActiveCfg = Release|Any CPU
 		{E9B83C26-D1A1-4CC7-83C4-BBBC7A22C615}.Release|x86.Build.0 = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|x64.Build.0 = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Debug|x86.Build.0 = Debug|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|x64.ActiveCfg = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|x64.Build.0 = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|x86.ActiveCfg = Release|Any CPU
+		{65A71729-7178-4BE8-991A-D9A1D8C74959}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
