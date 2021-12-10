@@ -17,8 +17,8 @@
 ## Checklist
 - [x] service layer <br/>
 - [x] tests for service <br/>
-- [ ] endpoints <br/>
-- [ ] tests for endpoints <br/>
+- [x] endpoints <br/>
+- [x] tests for endpoints <br/>
 - [ ] dockerize app <br/>
 - [ ] setup postman collection for endpoints <br/>
 - [ ] setup github workflows for CI <br/>

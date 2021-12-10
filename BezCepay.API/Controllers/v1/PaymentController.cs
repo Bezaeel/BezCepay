@@ -22,13 +22,32 @@ namespace BezCepay.API.Controllers.v1
         public async Task<IActionResult> create(AddPaymentDTO payment)
         {
             var result = await _paymentRequest.CreatePayment(payment);
-            return Ok(result);
+            if(result.Code == Service.Communication.ErrorCodes.Success){
+                return Ok(result);
+            }
+            return StatusCode(500, result);
+        }
+
+        [HttpGet("find/{id}")]
+        public async Task<IActionResult> GetPaymentById(int id)
+        {
+            var result = await _paymentRequest.GetPaymentById(id);
+            if(result.Code == Service.Communication.ErrorCodes.Success){
+                return Ok(result);
+            } else if(result.Code == Service.Communication.ErrorCodes.Notfound){
+                return NotFound(result);
+            }
+            return StatusCode(500, result);
         }
 
         [HttpGet("all")]
-        public IActionResult Payments()
+        public async Task<IActionResult> Payments()
         {
-            return Ok("Ask Talabi..");
+            var result = await _paymentRequest.GetAllPayments();
+            if(result.Code == Service.Communication.ErrorCodes.Success){
+                return Ok(result);
+            }
+            return StatusCode(500, result);
         }
     }
 }
