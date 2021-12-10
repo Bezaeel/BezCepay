@@ -1,28 +1,21 @@
-using System.Diagnostics;
 using System.Collections.Generic;
 using AutoMapper;
 using BezCepay.Data.Models;
-using BezCepay.Service.Features.OrderFlow;
 using Moq;
 using Xunit;
-using System;
-using BezCepay.Data.IRepositories;
-using BezCepay.Service.Features.OrderFlow.Dtos;
-using BezCepay.Data;
-using Microsoft.EntityFrameworkCore;
 using BezCepay.Data.Repositories;
 using System.Threading.Tasks;
 using BezCepay.Service.Mappings;
 using BezCepay.Service.Features.PaymentFlow;
 using BezCepay.Service.Features.PaymentFlow.Dtos;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+using Microsoft.Extensions.Logging;
 
-namespace BezCepay.Test.Service 
+namespace BezCepay.Test.Service
 {
     public class PaymentWorkflowUnitTests
     {
         private readonly IMapper mapper;
+        private readonly Mock<ILogger<PaymentRequest>> _logger;
         
         static Setup setup;
 
@@ -34,6 +27,7 @@ namespace BezCepay.Test.Service
                 cfg.AddProfile(new Configs());
             });
             mapper = mockMapper.CreateMapper();
+            _logger = new Mock<ILogger<PaymentRequest>>();
         }
 
 
@@ -44,7 +38,7 @@ namespace BezCepay.Test.Service
             
             // Given
             var repo = new PaymentRepository<Payment>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             AddPaymentDTO dto = new AddPaymentDTO{
                 OrderId = 1,
                 Amount = 1000,
@@ -59,7 +53,7 @@ namespace BezCepay.Test.Service
         {
             // Given
             var repo = new PaymentRepository<Order>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             
             var result = await paymentRequest.GetAllPayments();
             var expectedResult = result.Data as List<Payment>;
@@ -70,7 +64,7 @@ namespace BezCepay.Test.Service
         public async Task ShouldGetPaymentById()
         {
             var repo = new PaymentRepository<Order>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             
             var result = await paymentRequest.GetPaymentById(1);
             var expectedResult = result.Data as Payment;
@@ -84,7 +78,7 @@ namespace BezCepay.Test.Service
             
             // Given
             var repo = new PaymentRepository<Payment>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             AddPaymentDTO dto = new AddPaymentDTO{
                 Amount = 1000,
                 CurrencyCode = "NGN",
@@ -100,7 +94,7 @@ namespace BezCepay.Test.Service
             
             // Given
             var repo = new PaymentRepository<Payment>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             AddPaymentDTO dto = new AddPaymentDTO{
                 OrderId = 1,
                 CurrencyCode = "NGN",
@@ -116,7 +110,7 @@ namespace BezCepay.Test.Service
             
             // Given
             var repo = new PaymentRepository<Payment>(setup.dbContext);
-            var paymentRequest = new PaymentRequest(repo, mapper);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             AddPaymentDTO dto = new AddPaymentDTO{
                 OrderId = 1,
                 Amount = 3500,
@@ -125,11 +119,6 @@ namespace BezCepay.Test.Service
             var result = await paymentRequest.CreatePayment(dto);
             Assert.Equal(false, result.IsSuccess);
         }
-
-        
-
-
-        
     }
 
 }
