@@ -35,7 +35,7 @@ namespace BezCepay.Data.Repositories
         {
             ModelDbSets.AddRange(entities);
         }
-        public async Task<IEnumerable<TModel>> GetAllAsync()
+        public virtual async Task<IEnumerable<TModel>> GetAllAsync()
         {
             return await ModelDbSets.ToListAsync();
         }
