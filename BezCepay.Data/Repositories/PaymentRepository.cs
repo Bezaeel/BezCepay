@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BezCepay.Data.IRepositories;
 using BezCepay.Data.Models;
@@ -18,5 +21,11 @@ namespace BezCepay.Data.Repositories
         {
             return await context.Payments.Include(c => c.Order).ToListAsync();
         }
+
+        public async Task<Payment> GetAsync(Expression<Func<Payment, bool>> predicate)
+        {
+            return await context.Payments.Include(c => c.Order).Where(predicate).FirstOrDefaultAsync();
+        }
+
     }
 }
