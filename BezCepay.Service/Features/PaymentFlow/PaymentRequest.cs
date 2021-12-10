@@ -3,6 +3,7 @@ using BezCepay.Data.IRepositories;
 using BezCepay.Data.Models;
 using BezCepay.Service.Communication;
 using BezCepay.Service.Features.PaymentFlow.Dtos;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -12,12 +13,14 @@ namespace BezCepay.Service.Features.PaymentFlow
     {
         private readonly IPaymentRepository _paymentRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<PaymentRequest> _logger;
         private ServiceResponse apiResponse;
 
-        public PaymentRequest(IPaymentRepository paymentRepository, IMapper mapper)
+        public PaymentRequest(IPaymentRepository paymentRepository, IMapper mapper, ILogger<PaymentRequest> logger)
         {
             _paymentRepository = paymentRepository;
             _mapper = mapper;
+            _logger = logger;
             apiResponse = new ServiceResponse();
 
         }
@@ -31,8 +34,9 @@ namespace BezCepay.Service.Features.PaymentFlow
                 apiResponse.Code = ErrorCodes.Success;
                 apiResponse.Data = result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogCritical(ex, "GetAllPayments exception");
                 apiResponse.IsSuccess = false;
                 apiResponse.Code = ErrorCodes.Exception;
                 apiResponse.Message = "Error occurred";
@@ -48,8 +52,8 @@ namespace BezCepay.Service.Features.PaymentFlow
                 if(result == null)
                 {
                     apiResponse.IsSuccess = false;
-                    apiResponse.Code = ErrorCodes.Error;
-                    apiResponse.Message = "Asset does not exist";
+                    apiResponse.Code = ErrorCodes.Notfound;
+                    apiResponse.Message = "Payment does not exist";
                     return apiResponse;
                 }
                 apiResponse.IsSuccess = true;
@@ -57,8 +61,9 @@ namespace BezCepay.Service.Features.PaymentFlow
                 apiResponse.Code = ErrorCodes.Success;
                 apiResponse.Data = result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogCritical(ex, "GetPaymentById exception");
                 apiResponse.IsSuccess = false;
                 apiResponse.Code = ErrorCodes.Exception;
                 apiResponse.Message = "Error occurred";
@@ -82,6 +87,7 @@ namespace BezCepay.Service.Features.PaymentFlow
             }
             catch (Exception ex)
             {
+                _logger.LogCritical(ex, "CreatePayment exception");
                 apiResponse.IsSuccess = false;
                 apiResponse.Code = ErrorCodes.Exception;
                 apiResponse.Message = "Error occurred";

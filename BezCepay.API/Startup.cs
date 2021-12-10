@@ -37,13 +37,17 @@ namespace BezCepay.API
                 options.UseNpgsql(Configuration.GetConnectionString("Default")
             ));
 
+            services.AddLogging();
             services.AddScoped<IOrderRequest, OrderRequest>();
             services.AddScoped<IOrderRepository, OrderRepository<Order>>();
             services.AddScoped<IPaymentRequest, PaymentRequest>();
             services.AddScoped<IPaymentRepository, PaymentRepository<Payment>>();
             services.AddAutoMapper(typeof(BezCepay.Service.Mappings.Configs));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BezCepay.API", Version = "v1" });
