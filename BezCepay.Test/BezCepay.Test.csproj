@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -30,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BezCepay.Service\BezCepay.Service.csproj" />
     <ProjectReference Include="..\BezCepay.Data\BezCepay.Data.csproj" />
+    <ProjectReference Include="..\BezCepay.API\BezCepay.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>
