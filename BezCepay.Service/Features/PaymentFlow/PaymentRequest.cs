@@ -76,6 +76,7 @@ namespace BezCepay.Service.Features.PaymentFlow
             try
             {
                 var model = _mapper.Map<AddPaymentDTO, Payment>(dto);
+                model.CurrencyCode = model.CurrencyCode.ToUpper();
                 model.Status = Data.Enums.PaymentStatus.Created;
                 model.CreationDate = DateTime.UtcNow;
                 _paymentRepository.Add(model);
