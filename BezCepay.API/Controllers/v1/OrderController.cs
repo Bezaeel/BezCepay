@@ -41,7 +41,7 @@ namespace BezCepay.API.Controllers.v1
             return StatusCode(500, result);
         }
 
-        [HttpGet("find/:id")]
+        [HttpGet("find/{id}")]
         public async Task<IActionResult> GetOrderById(int id)
         {
             var result = await _orderRequest.GetOrderById(id);
