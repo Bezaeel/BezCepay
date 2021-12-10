@@ -19,6 +19,11 @@
 - [x] tests for service <br/>
 - [x] endpoints <br/>
 - [x] tests for endpoints <br/>
-- [ ] dockerize app <br/>
+- [x] dockerize app <br/>
 - [ ] setup postman collection for endpoints <br/>
 - [ ] setup github workflows for CI <br/>
+
+## How to run
+- [] configure connection strings in appsettings.json in API project and `test.json` in Test project
+- navigate to `BezCepay.API` run `dotnet run`
+- using docker

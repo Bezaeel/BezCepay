@@ -33,6 +33,7 @@ namespace BezCepay.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
             services.AddDbContext<AppDbContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("Default")
             ));
@@ -60,10 +61,7 @@ namespace BezCepay.API
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
-                if (env.IsDevelopment()){
-                    context.Database.EnsureCreated();
-                }
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
             }
             
             if (env.IsDevelopment())
@@ -73,7 +71,7 @@ namespace BezCepay.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BezCepay.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -81,6 +79,7 @@ namespace BezCepay.API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapControllers();
             });
         }
