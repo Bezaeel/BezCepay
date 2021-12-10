@@ -15,8 +15,8 @@
 
 
 ## Checklist
-- [ ] service layer <br/>
-- [ ] tests for service <br/>
+- [x] service layer <br/>
+- [x] tests for service <br/>
 - [ ] endpoints <br/>
 - [ ] tests for endpoints <br/>
 - [ ] dockerize app <br/>

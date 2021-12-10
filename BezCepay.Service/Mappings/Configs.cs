@@ -10,6 +10,8 @@ namespace BezCepay.Service.Mappings
         public Configs()
         {
             CreateMap<Payment, AddPaymentDTO>();
+            CreateMap<AddPaymentDTO, Payment>();
+            CreateMap<AddOrderDTO, Order>();
             CreateMap<Order, AddOrderDTO>();
         }
        
