@@ -4,7 +4,8 @@
     {
         Success = 00,
         Exception = 99,
-        Error = -11
+        Error = -11,
+        Notfound = 33
 
     }
     public class ServiceResponse
