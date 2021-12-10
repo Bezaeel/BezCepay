@@ -9,9 +9,10 @@ namespace BezCepay.Data
         {
 
         }
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public AppDbContext(DbContextOptions options)
             : base(options)
         {
+            
         }
 
         public DbSet<Order> Orders { get; set; }
