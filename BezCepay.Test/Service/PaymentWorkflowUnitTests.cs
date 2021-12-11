@@ -52,7 +52,7 @@ namespace BezCepay.Test.Service
         public async Task ShouldGetAllPayments()
         {
             // Given
-            var repo = new PaymentRepository<Order>(setup.dbContext);
+            var repo = new PaymentRepository<Payment>(setup.dbContext);
             var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             
             var result = await paymentRequest.GetAllPayments();
@@ -63,12 +63,12 @@ namespace BezCepay.Test.Service
         [Fact]
         public async Task ShouldGetPaymentById()
         {
-            var repo = new PaymentRepository<Order>(setup.dbContext);
+            var repo = new PaymentRepository<Payment>(setup.dbContext);
             var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
             
             var result = await paymentRequest.GetPaymentById(1);
             var expectedResult = result.Data as Payment;
-            Assert.NotNull(expectedResult);
+            Assert.NotNull(expectedResult.Id);
         }
 
         [Fact]
@@ -118,6 +118,17 @@ namespace BezCepay.Test.Service
             };
             var result = await paymentRequest.CreatePayment(dto);
             Assert.Equal(false, result.IsSuccess);
+        }
+
+        [Fact]
+        public async Task ShouldGetPaymentById_EnsureOrderObject_IsNotNull()
+        {
+            var repo = new PaymentRepository<Payment>(setup.dbContext);
+            var paymentRequest = new PaymentRequest(repo, mapper, _logger.Object);
+            
+            var result = await paymentRequest.GetPaymentById(1);
+            var expectedResult = result.Data as Payment;
+            Assert.NotNull(expectedResult.Order);
         }
     }
 
