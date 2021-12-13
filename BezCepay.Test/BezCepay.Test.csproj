@@ -37,6 +37,11 @@
 
   <ItemGroup>
     <Content Include="$(ProjectDir)Config\test.json" CopyToOutputDirectory="Always" BuildOptions="Content" />
-</ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="xunit.runner.json"> 
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

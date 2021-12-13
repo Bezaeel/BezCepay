@@ -52,11 +52,6 @@ namespace BezCepay.Test
                     OrderId = 1,
                     Amount= 1000,
                     CurrencyCode = "USD"
-                },
-                new Payment{
-                    OrderId = 2,
-                    Amount= 2000,
-                    CurrencyCode = "EUR"
                 }
             );
             dbContext.SaveChanges();

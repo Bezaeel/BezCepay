@@ -46,7 +46,7 @@ namespace BezCepay.Test
             var repo = new PaymentRepository<Payment>(setup.dbContext);
             var serviceMock = new PaymentRequest(repo, mapper,_logger.Object);
             var actionResult = new PaymentController(serviceMock, mapper);
-            var expectedResult = await actionResult.GetPaymentById(100) as ObjectResult;
+            var expectedResult = await actionResult.GetPaymentById(1) as ObjectResult;
             Assert.Equal(StatusCodes.Status200OK, expectedResult.StatusCode);
         }
 
